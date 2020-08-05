@@ -8,7 +8,7 @@ const scripts = require('./gulp/scripts');
 
 const clean = require('./gulp/clean');
 
-const dev = gulp.parallel(html, fonts, img, styles, scripts);
+const dev = gulp.parallel(fonts, img, html, styles, scripts);
 const build = gulp.series(clean, dev);
 
 module.exports.start = gulp.series(build);

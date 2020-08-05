@@ -1,24 +1,35 @@
 const gulp = require('gulp');
-const sass = require('gulp-sass');
-const cleanCSS = require('gulp-clean-css');
+const postcss = require('gulp-postcss');
 const sourcemaps = require('gulp-sourcemaps');
-const autoprefixer = require('gulp-autoprefixer');
+const postcssPresetEnv = require('postcss-preset-env');
+const postcssImport = require('postcss-import');
+const postcssMixins = require('postcss-mixins');
+const postcssCustomMedia = require('postcss-custom-media');
+const precss = require('precss');
+const cssnano = require('cssnano');
 const rename = require('gulp-rename');
 
 module.exports = function styles() {
-  return gulp.src('src/scss/*.scss')
+  var plugins = [
+    postcssImport(),
+    postcssMixins(),
+    postcssCustomMedia(),
+    precss(),
+    postcssPresetEnv({
+      autoprefixer: {
+        grid: true
+      },
+      stage: 3
+    }),
+    cssnano()
+  ];
+  return gulp.src('src/css/*.pcss')
     .pipe(sourcemaps.init())
-    .pipe(sass())
-    .pipe(autoprefixer({
-      cascade: false
-    }))
-    .pipe(cleanCSS({
-      debug: true,
-      compatibility: '*'
-    }, (details) => {
-      console.log(`${details.name}: before:${details.stats.originalSize} - after: ${details.stats.minifiedSize}`);
-    }))
+    .pipe(postcss(plugins))
     .pipe(sourcemaps.write())
-    .pipe(rename({suffix: '.min'}))
+    .pipe(rename({
+      suffix: '.min',
+      extname: '.css'
+    }))
     .pipe(gulp.dest('docs/css'))
 };

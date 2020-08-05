@@ -1,0 +1,31 @@
+@define-mixin focus-outline {
+  /* stylelint-disable */
+  outline: thin dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+  /* stylelint-enable */
+}
+
+@define-mixin sr-only {
+  position: absolute;
+
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+
+  border: 0;
+
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(100%);
+}
+
+@define-mixin button-reset {
+  padding: 0;
+
+  font: inherit;
+  color: inherit;
+
+  background-color: transparent;
+  border: none;
+}

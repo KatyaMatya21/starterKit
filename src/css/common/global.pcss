@@ -1,0 +1,21 @@
+html {
+  font-size: 16px;
+
+  @media (--viewport-md) {
+    font-size: 20px;
+  }
+}
+
+body {
+  font-weight: 500;
+  line-height: 1.5;
+  font-family: "Comfort", "Arial", sans-serif;
+  color: var(--blue);
+  font-style: normal;
+
+  background-color: var(--yellow);
+}
+
+button {
+  @mixin button-reset;
+}
