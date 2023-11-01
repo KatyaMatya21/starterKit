@@ -1,7 +1,7 @@
 const gulp = require('gulp');
 const webpack = require('webpack-stream');
 
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = function script() {
   return gulp.src('src/js/script.js')
@@ -27,9 +27,8 @@ module.exports = function script() {
       },
       optimization: {
         minimize: true,
-        minimizer: [new UglifyJsPlugin({
-          test: /\.m?js$/,
-          sourceMap: true
+        minimizer: [new TerserPlugin({
+          test: /\.m?js$/
         })],
       },
     }))

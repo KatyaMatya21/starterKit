@@ -1,7 +1,7 @@
-const del = require('del');
-
 module.exports = function clean(cb) {
-  return del('docs').then(() => {
-    cb();
+  import('del').then(function(del){
+    return del.deleteAsync('docs').then(() => {
+      cb();
+   });
   });
 };
